@@ -1,0 +1,111 @@
+Data Structures
+
+PA 08
+Using search to solve the Cannibals and Missionaries problem
+
+Due by Friday, December 12th at the start of class OR
+
+Wednesday, December 10th if you want feedback prior to the final exam
+
+The introduction
+
+In the missionaries and cannibals problem, three missionaries and three cannibals must cross a river
+
+    * using a boat which can carry at most two people
+    * the boat cannot cross the river by itself with no people on board
+    * for both banks, if there are missionaries present on the bank, they cannot be outnumbered by cannibals (if they were, the cannibals would eat the missionaries.) The boat cannot cross the river by itself with no people on board
+
+Your tasks
+
+Your job for this assignment is to write a complete, working program which can be executed by loading a file named pa08.py and executing a method called solveProblem() (no parameters required). 
+
+solveProblem() should directly or indirectly (through the calling of other classes and methods):
+
+   1. Build the graph which represents all the valid states in this problem (vertices) and the transitions between them (edges).
+   2. Apply either a BFS or DFS to this graph to identify "predecessors" for each state/vertex.
+   3. Print the sequence of actions that moves the people from the starting situation to the ending situation.
+
+ 
+
+To complete step #1 you have three options:
+
+    * First option, use paper and pencil to generate all of the edges and vertices in this graph (Without telling you what they are, there are 16 vertices and 15 edges in the complete graph).  You may hardcoded this graph by writing a sequence of addVertex() and addEdge() commands much like I did in build.py during session36.  This approach will earn you 5 points.
+    * Second option, use paper and pencil to generate all of the edges and vertices in this graph (see above).  However, convert this to a mathematical representation and type it into a text file.  Use your code from PA07 to read this file and create/load the graph.  This approach will earn you 7 points.
+    * Third option, write code to generate the graph automatically.  Look at how the knight's graph was generated automatically (Listing 6.5 and 6.6 in your textbook) and how Word Ladder was generated automatically (Listing 6.3).  To make this work you need to create a simple mathematical representation of each state such as 331000 for the starting state (3 cannibals, 3 missionaries, 1 boat on the left bank, 0 of each on the right bank) or, better yet, just 331 (since if you know the left bank you can calculate the right bank) and apply a "simple" set of math rules to look at the different options for people in the boat.  This approach will earn you 10 points.
+
+ 
+
+To complete step #2 you have two options.  Use either BFS or DFS to identify the predecessors for each state/vertex.  Since both of these algorithms are largely correct as is in your textbook it takes very little to modify what is stored in the predecessor variable (like we did in Lab14) to fit this problem.  Either approach will earn you 5 points.
+
+ 
+
+To complete step#3 you need to figure out a way to navigate the predecessors built in step #2 to print the list of states from the starting state (331 in my program) to the ending state (000 in my program).  For example, the code that I wrote produced:
+
+    331
+    130
+    231
+    030
+    131
+    110
+    221
+    200
+    301
+    100
+    201
+    000
+
+Notice that depending on how you produce your graph and it's BFS/DFS this MAY require reversing the steps.  For example, in our word ladder activity "fool" was at the top of the graph and "sage" was at the bottom.  We printed the path from sage to fool which was bottom/up.  If you create a graph in step#2 with the start state at the top and the end state at the bottom (a logical activity) we need to print top/down rather than bottom/up. 
+
+You may orient your graph either way, but you should print similar to the listing above to receive the 5 points for this activity.
+
+ 
+
+I will assign an additional 5 points for overall organization and detail issues.  For example, is your code relatively easy to read?  Do you have comments where appropriate (such as a header block with your name in it)?  Does your program run given my conditions listed above?
+
+Finally, I will award up to 3 additional bonus point for code which prints "nicer" output in step#3.  For example, if you printed:
+
+    3 cannibals, 3 missionaries, 1 boat on the left bank
+    1 cannibal, 3 missionaries, 0 boat on the left bank
+    2 cannibals, 3 missionaries, 1 boat on the left bank
+    ...
+    0 cannibals, 0 missionaries, 0 boat on the left bank
+
+Then I would likely award an additional point or two depending on the complexity of what you did.
+
+If you included what transitions were necessary to move between states, such as :
+
+    331
+    send over 2 cannibals to get
+    130
+    send over 1 cannibal to get
+    231
+    send over 2 cannibals to get
+    030
+    send over 1 cannibal to get
+    131
+    send over 2 missionaries to get
+    110
+    ...
+    201
+    send over 2 missionaries to get
+    000
+
+Then I would likely award an additional point or two depending on complexity.
+
+Doing both of these would yield the full three bonus points.
+
+Submitting your assignment
+
+To get full credit for this assignment you must:
+
+    * Produce pa08.py as described above
+    * Upload a zip file named pa08.zip which contains
+          o pa08.py
+          o ALL other files necessary to get this program to work
+    * Submit paper printouts of all classes that you modified (for example, if you use vertex.py or queue.py without modification you need NOT print them).
+
+If you submit code and paper printouts on Wednesday, December 10th by the start of class I will promise to grade your assignment and return it to you on Friday, December 12th.
+
+Alternately, if you submit both products by the start of class on Friday, December 12th you will not receive formal feedback but will just see a grade reported with final grades.
+
+ 

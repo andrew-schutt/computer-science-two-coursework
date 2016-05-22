@@ -1,0 +1,135 @@
+Data Structures
+
+PA 06
+Using Multiple Data Structures to Solve a Non-Trivial Problem
+
+Due by Tuesday, November 11th at the start of lab
+
+(A trivial modification to the final deliverable was made on 11/7/2008)
+
+The introduction
+
+Let's face it, most of the problems that we have considered this semester have been rather trivial.  Often times we come up with significant simplifications to real-world problems, or we simply start with a simple (and often boring) problem.
+
+In this assignment I want you to tackle a fairly non-trivial problem.  The end result of this assignment is the production of a concordance - an alphabetical listing of the main words in a document often including the context of the words (For this assignment that "context" will be the line numbers in which each word appears).  A concordance is often used as a tool to help scholars study the use of language in a text.
+
+For example, if I gave you the following classic nursery rhyme based limerick:
+
+    Hickory, dick-ory, dock.
+    The mouse ran up the clock.
+
+       The clock struck one,
+       The mouse ran down.
+
+    Hickory, dick-ory, dock.
+
+You might produce the following concordance:
+
+    clock -  2, 3
+    dick-ory -  1, 5
+    dock -  1, 5
+    down -  4
+    hickory -  1, 5
+    mouse -  2, 4
+    one -  3
+    ran -  2, 4
+    struck -  3
+    the -  2, 2, 3, 4
+    up -  2
+
+As you can imagine, before computers it was REALLY difficult and time-consuming to produce a concordance.  However, with computers this becomes a task that can be accomplished relatively quickly with the right code.
+
+ 
+
+General things to know for this assignment
+
+    * In order to complete this assignment you will need to be able to read from and write to text files.  You should review how to open a file for reading/writing (among other sources for this, you read from a file in PA03)
+
+ 
+
+    * For purposes of this assignment, a word is defined to be a sequence of letters, apostrophes (not contained in my example), or single hyphens.  Thus, the following should be treated as words:
+          o it's
+          o node-based
+          o end-of-line-characters
+
+      Notice that all other punctuation, whitespace, brackets, parentheses, dashes, double quotes, etc. should not be included as part of a word. 
+
+      One way to do this is through the creation of a regular expression - a formal definition of what it means to be a legal word.  While you are not required to do this you may want to use this concept in your solution.  Check out http://docs.python.org/dev/howto/regex for a tutorial on how to compile, search, and group with a regular expression to parse to our definition of a "word."
+
+       
+    * There is no difference between upper-case and lower-case letters.  In my example both "the" and "The" are referenced under "the"
+
+ 
+
+    * Line numbers are to relate to non-empty lines only.  In my example, notice that the word "one" is listed as being on the third line, not the fourth line.
+
+ 
+
+    * Recall that my definition of concordance used the phrase "main words"   Large texts contain a lot of very common words that aren't normally listed in a concordance.  For example, the word "the" is a REALLY common word.  If I included it in a concordance not only would I take up pages of space printing every time the word appeared, but it really wouldn't be of any benefit - scholars probably aren't interested in the use of the word "the".  Thus, many concordances filter out what are called "stop words."  These are common words whose inclusion isn't considered interesting.
+
+Requirements
+
+   1. Create a file called dictionary.py
+
+      In this, create your own implementation of the HashTable ADT as defined in section 4.3.3.3 your textbook. 
+          * HashTable(size) - creates a new hash table with size slots
+          * store(item,data) - stores a new piece of data in the hash table using item as the key location.  It returns nothing.
+          * search(item) - returns the data value associated with the key item.  It returns None if the key is not in the hash table.
+
+      As part of this you will need to create the helper methods that calculate the hash value for a given item and the rehash method for what to do when collisions occur.
+
+      Test your implementation before moving on. 
+
+      Notice that this is the first data structure you will use in solving this problem.
+
+       
+   2. Create a file called pa06.py
+
+      In this, create a method called createConcordance() which takes three parameters:
+          * The first is the text file for which you want to create the concordance. 
+          * The second is the text file containing stop words - one word per line.
+          * The third is the name of the output file to which the concordance will be written
+
+      This method will eventually need to be able to
+          * open the stop word file and create a dictionary of all stop words (using the dictionary/HashTable you wrote above.  The "data" associated with each key/item is actually a throwaway value at this point and is not part of the processing.
+          * open the first file and process it into "words" (using our prior definition)
+          * for each word it encounters it will need to see if the word is a stop word or not
+          * if the word is not a stop word it will need to add this specific occurrence of the word to a second dictionary.  This dictionary uses the word as the key/item and stores a linked list or queue (a second data structure) of all occurrences of the word as its corresponding data.
+          * Once all data is read from the first file this method should take the list of all keys/items in the second dictionary and sort them.
+          * Finally, the method should open the third file for writing and print out each word in the concordance in alphabetical order, along with a list of all line number in which that word occurs.
+
+Development and Testing
+
+I suggest you build your code slowly and in small, testable stages.  For example, you should have your dictionary completely developed and thoroughly tested before you move on to attempting to create the concordance.  Similarly, you should first make sure you know how to read the source file into single words properly before you worry about things such as stop words or how you will put these words into a dictionary storing a list/queue of line numbers.
+
+I will provide only limited assistance to students who can not demonstrate that they are working through this assignment in small, testable steps.  If you come to me tackling too many things at once I will tell you to come back when you are focusing on one issue at a time.
+
+Data Files
+
+You may want to generate a small source text and a small stop word file in order to test this on manageable data.  However, once you are ready to really test your code you may use the following as your source and your stop words:
+
+    * magi.txt (for source)
+    * stop_words.txt (for stops words I bet!)
+
+Grading
+
+Completing this lab so that everything works as described above will earn you 32 out of the 40 points possible on this assignment.  In addition to that you may do some combination of the following to earn up to 4 additional points for each improvement.
+
+   1. Create a hashfunction() which attempt to evenly distribute the words across all slots.  In other words, you probably want to do something OTHER than simply sum up the ordinal values of all of the characters in the word and then mod this by the size of the table (the default way to do this).  While this acceptable, you are more likely to have collisions since words such as "tar" and "rat" would clearly develop the same hash.  Instead you should read your textbook for information about other techniques such as the folding method or the mid-square method.  You also can research some other method, document where you learned about it, and use it instead.
+   2. This assignment assumes you will use open-addressing.  You may create a rehash() method which uses something other than linear probing.  Your book describes quadratic probing as one alternative, although there are several methods available such as double hashing (do a google search).  You also could elect to use closed-addressing via chaining rather than rehasing at all (this would give you a third data structure).
+   3. While I indicated you were not required to use the regular expression technique referenced above, doing so will make you eligible for additional points.
+   4. If you can identify some other significant improvement to the base requirements of this assignment and you discuss this with me in advance I will consider granting additional points for this as well.
+
+Submitting your assignment
+
+To get full credit for this assignment you must:
+
+    * Produce dictionary.py and pa06.py as described above
+    * Write a one page write up of your code including what your code does and any improvements you made to it you feel are eligible for additional points (documenting where you learned about the technique(s) you use).  This should be called readme.txt.
+    * Upload a zip file named pa06.zip which contains
+          o pa06.py
+          o dictionary.py
+          o readme.txt
+          o any additional data structures that you needed to solve this assignment. 
+    * Submit paper printouts of the three main files
+

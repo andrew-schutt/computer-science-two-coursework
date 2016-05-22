@@ -1,0 +1,80 @@
+Data Structures
+
+PA 05
+Improving the Time-efficiencey of the Radix Sort
+
+Due by Wednesday, October 29th at the start of class
+
+The introduction
+
+IN PA04 we considered the Radix sort.  In that lab we looked at iteratively sorting the numbers into "bins" (represented by a queue) based on the value of a given digit from each number, and then reassembling a master list from the values in these bins.  We discussed in class that there was some time overhead in reassembling this master list because you have to move each of the n items being sorted from their bins into the master queue and in PA04 this was done by moving each item one at a time.  Thus, each pass through the data took 2N operations (one set of N to move the values into their bins, and another set of N to move the values back into the master queue).
+
+Yet, when I describe this sort to you I talk about picking up bin 0 and putting it's cards into the master queue - one operation.  Then picking up bin 1 and putting all of it's cards into the master queue - one operation.  In other words, I describe taking only ten operations to move the 10 bins back to the master queue, regardless of how big the value of n.
+
+The way to do this in code is to use bins which are represented by queues using linked nodes as we did in Lab09.  In this assignment you will write such a sort and test it's efficiency.
+
+Before you start:
+
+In your directory for this assignment, copy over node.py from Lab09. 
+
+Also, copy over your Queue class from lab09.py but rename this file linkedQueue.py (remember that lab09.py had more than one class in it.  We want JUST the Queue in linkedQueue.py)
+
+Part A
+
+    * Create a file called pa05.py
+    * Within this, create a method called linkedRadixSort() that takes aList as a parameter which can be assumed to be a list of non-negative integers only.
+    * Construct 11 queues using the linked-node-based Queue in linkedQueue.py.  These represent a main queue and 10 "bins" each of which stores one of the digits.
+    * As with PA04:
+          o The algorithm determines the length of the largest number in the list
+          o The algorithm calculates how many powers of 10 are represented by this number (1s digit, 10s digit, 100s digit in my example is 3 powers of 10).  range(20000) would produce numbers 0-19999 which means I would need to consider 5 powers of 10 (1, 10, 100, 1000, 10000).
+          o Moves all the numbers from aList into the main queue
+          o For each power of 10 from 1 up to the largest power needed, it iteratively conducts a single stage.  During each stage the sort
+                + moves each number from the main queue (preserving order) into the appropriate bin/queue
+                + once the main queue is empty, refills the main queue by emptying the 10 individual queues, in order
+          o returns the finished, sorted list
+    * Unlike PA04:
+          o When you refill the main queue from the 10 individual queues during each iteration you should do so by taking advantage of the linked representation of the individual queues.  In other words, this reassembly should be based on 10 fixed length operations rather than N individual operations. 
+          o Note, "moving" one queue from one bin spot to another may be a little more involved than it first appears.  You will need to add some additional functionality to your linked-node-based queue.  The discovery of this is up to you.  Pay attention to results during your testing.
+
+Again, you should do this by using your linked representation of the queue. 
+
+The data above is clearly Bin 6 after processing the ones digit.  What you need to figure out is how you can move this to the end of the main Bin and then move Bin 7 to the end of this queue/bin without moving each of the items individually.  Furthermore, you need to figure out how to then tell bin 6 that it is now empty (that is, both front and rear should be marked as None.
+
+Part B
+
+    * Create a file called timer.py
+    * Within this, create a method called radixTimer() that takes aList as a parameter which can be assumed to be a list of non-negative integers only.
+    * This method should start a clock, pass aList to the radixSort() method that you just created in Part A, and stop the time once the method returns a sorted list.
+    * Print a nice message (like others we have used in timer methods) that indicates how large the original list was and how long the sort took.
+    * THEN....
+    * This method should start the clock a second time, pass aList to the radixSort() you created in PA04, and stop the time once the method returns a sorted list (please notice that you have to make sure that your original list isn't modified by the first sort_.
+    * Print a nice message that indicates how large the original list was and how long THIS sort took.
+
+For example, to use this you might type:
+
+      >>> aList = range(100000)
+      >>> import random
+      >>> random.shuffle(aList)
+      >>> radixTimer(aList)
+      It took 14.334 seconds to sort 100000 items using the linked queue.
+      It took 7.982 seconds to sort 100000 items using the list based queue.
+      
+
+By the way, my numbers above are completely made up so if you get something different, no problem.
+
+Finally, you should run this code with several different sets of data (I would suggest trying each of the powers of 10 from 10 to 100,000)  and observe the differences between these two implementations of the Radix Sort.
+
+Submitting your assignment
+
+To get full credit for this assignment you must:
+
+    * Produce pa05.py that contains the radixSort() described above.
+    * Produce timer.py that contains radixTimer() as described above.
+    * Upload
+          o pa05.py
+          o timer.py
+          o linkedQueue.py
+          o pa04.py (needed for timing your previous radixSort)
+    * Submit paper printouts of all four classes
+    * Submit a half-page summary of what you observed when you ran several tests using your code from Part B.
+

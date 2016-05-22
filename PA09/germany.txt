@@ -1,0 +1,2 @@
+Frankfurt>Mannheim:85 Mannheim>Frankfurt:85 Frankfurt>Wurzburg:217 Wurzburg>Frankfurt:217 Frankfurt>Kassel:173 Kassel>Frankfurt:173 Mannheim>Karlsruhe:80 Karlsruhe>Mannheim:80 Wurzburg>Erfurt:186 Erfurt>Wurzburg:186 Wurzburg>Nurnberg:103 Nurnberg>Wurzburg:103 Stuttgart>Nurnberg:183 Nurnberg>Stuttgart:183 Karlsruhe>Augsburg:250 Augsburg>Karlsruhe:250 Nurnberg>Munchen:187 Munchen>Nurnberg:187 Kassel>Munchen:502 Munchen>Kassel:502 Augsburg>Munchen:84 Munchen>Augsburg:84
+Frankfurt

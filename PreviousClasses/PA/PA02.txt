@@ -1,0 +1,53 @@
+Data Structures
+
+PA 02
+Validating basic HTML code
+
+Due by Wednesday, September 17th at the start of class
+
+[Code and paperwork due at the start of class]
+
+The assignment
+
+    * In a file called pa02.py create a method called htmlChecker()
+    * htmlChecker() takes a single (presumably long) symbol string as a parameter
+    * htmlChecker() returns True or False depending on whether or not the the symbol string was "valid" HTML where "valid" is defined as:
+          o A valid HTML string consists of HTML tags and page content
+          o An HTML tag is a tag contained between "<"  and ">"   For example, <html>  <body> and even <1234> would all be considered HTML tags in this assignment
+          o Every HTML tag comes in a pair - opening and closing tags.  A closing tag is the same as an opening tag with the addition of the forward slash (/) between the "<" and the name of the tag.  Thus, </html>  </body> and </1234> are the closing tags for the opening tags provided earlier
+          o HTML tags must be balanced.  This is defined as
+                + An opening tag must occur before the occurrence of a closing tag
+                + Any opening tag that occurs "inside" (between) another set of tags MUST also be closed within that set of tags as well. 
+                + Thus:
+                      # <a> <b> </b>  </a>  is balanced since the opening and closing of b happens entirely inside of the a-tags
+                      # <a> <b> </a> </b> is not balanced since the b-tag opens but does not close inside of the a-tags
+                      # <a> </a> <b> </b> is balanced since the there are no tags within either the a or b-tags
+          o HTML may contain content-data between tags.  Thus,
+                + <a> <b> VALID </b>  </a>  is valid, although technically
+                + <a> <b> </b>  </a> INVALID     is not since the content is completely outside of tags.
+    * There is a good example of a symbol string on page 96 in your textbook.  Remember that putting that entire block of code between a pair of triple quotes will allow you write strings that cross multiple lines.
+
+Hints about solving this:
+
+    * This assignment really has two sets of "matching" going on at the same time -
+          o Matching "<" with ">" to locate tags
+          o Pairing up opening tags (such as <a>) with closing tags (such as </a>)
+
+      You will likely need to use two different data structures to keep track of these two different (although heavily inter-dependent) things.  You may use either stacks or queues (or a mixture) depending on which ones you think makes the most sense. 
+
+Bonus
+
+TECHNICALLY, the content within tags could contain "<" and ">"  For example, the following would be valid HTML
+
+<A> <B>  2<3   </B>  <A>
+
+For the basic assignment you may assume that "<" and ">" are ONLY used in tag definition.  For the bonus points, you should allow Strings such as that given above.  The one restriction that we will put on this is that "<" and ">" will not appear in the SAME block of content. 
+
+Submitting your assignment
+
+To get full credit for this assignment you must:
+
+    * Produce pa02.py that meets the requirements described above
+    * Upload your pa02.py by the deadline along with the versions of stack.py and/or queue.py that you used in writing htmlChecker()
+    * Submit paper printouts of these two or three files by the deadline
+

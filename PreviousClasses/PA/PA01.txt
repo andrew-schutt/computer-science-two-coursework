@@ -1,0 +1,43 @@
+Data Structures
+
+PA 01
+Creating a die simulation class that uses die.py
+
+Due by Tuesday, September 9th at the start of lab
+
+[Code and paperwork due at the start of class]
+
+Make sure you read the directions carefully.  This assignment consists of several pieces and you need to complete all of the pieces for full credit. I strongly suggest that you either work in the labs and store your materials on your p: drive or that you carry them with you on a flash drive so that you can easily ask me or a TA for advise on the code if you encounter problems.
+
+Task #1
+
+Write a Python method called runSimulation() that:
+
+   1. is stored in a file called dieSimulation.py
+   2. imports the Die class you wrote in lab02 by including the line "from die import Die"
+   3. creates two eight-sided die
+   4. simulates "rolling" those two die 1000 times and recording the sum of the two die
+   5. outputs the results of the simulation by textually displaying each possible sum and the percentage of times that occurred
+
+Task #2
+
+Modify runSimulation() so that:
+
+    * it continues to complete steps 1-4 listed above
+    * accepts a String as a parameter
+          o If the parameter is the String "text" it produces the output described in step 5 above
+          o If the parameter is the String "graph" it replaces the text from step 5 with a histogram (bar chart) of asterisks representing the percentages for each of the possible sums
+          o If the parameter is neither "text" or "graph" displays an error message
+
+Bonus Activity
+
+You may earn additional points for this assignment by making a further modification to runSimulation such that it accepts a String (as described in task#2) and two integers.  These integers are taken to be the number of sides on each of the two dice used in the simulation.  This means that "runSimulation("text",8,8)" would be EXACTLY identical to the results from Task#1 but would allow you to also say someting like "runSimulation("graph",6,12) which considers the distribution from the rolling of a six-sided die along with a twelve-sided die. 
+
+Submitting your assignment
+
+To get full credit for this assignment you must:
+
+    * Produce a dieSimulation.py that meets the requirements described above
+    * Upload your die.py from Lab02 and dieSimulation.py from this assignment by the deadline
+    * Submit paper printouts of these two files by the deadline
+

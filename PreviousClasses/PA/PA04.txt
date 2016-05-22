@@ -1,0 +1,95 @@
+Data Structures
+
+PA 04
+The Radix Sort
+
+Due by Wednesday, October 15th at the start of class
+
+The introduction
+
+The Radix sort (pronounced RAY-dix) is a sort that can be used to sort non-negative integers (actually it can be used to sort other things too, but we will stick to non-negative integers).  It was the sort technique used in the old "card machine" days of computer science because of it's simplicity to implement when conducting sorts of physical items like cards.  While it seems to have fallen out of "style" it's actually a really interesting sort technique and fits in well with what you have learned so far in this data structures course.
+
+The radix sort works by iteratively sorting the numbers into "bins" (represented by a queue) based on the value of a given digit from each number, and then reassembling a master list from the values in these bins.  Most implementations of this sort work by using the LSD or "least significant digit" approach.  That is, you start by processing the least significant digit of the number (the ones digit).
+
+To illustrate the main concept of this sort suppose that you have the numbers
+
+    [160, 35, 65, 80, 2, 14, 802, 56]
+
+The Radix sort begins by dividing these numbers into "bins" based on their 1s digit while preserving the order of the original list within the individual bins.  Thus, we would get
+
+    0s bin contains  [160, 80 ]
+
+    2s bin contains  [2, 802 ]
+
+    4s bin contains  [14]
+
+    5s bin contains [35, 65]
+
+    6s bin contains [56]
+
+There would obviously also be bins for 1, 3, 7, 8, and 9, but these are empty given this data set.
+
+At this point we would reassemble the list in increasing order of the bin numbers.  This would give us the list
+
+    [ 160, 80, 2, 802, 14, 35, 65, 56]
+
+The radix sort now moves on to the 10s digit and sorts into bins which would produce:
+
+    0s bin contains [ 2 , 802 ]  *notice that 2 is the same as "02"
+
+    1s bin contains [ 14 ]
+
+    3s bin contains [ 35 ]
+
+    5s bin contains [ 56 ]
+
+    6s bin contains [ 160, 65 ]
+
+    8s bin contains [ 80 ]
+
+At this point we would reassemble the list in increasing order of the bin numbers to produce the list:
+
+    [ 2, 802, 14, 35, 56, 160, 65, 80 ]
+
+Finally we would consider the 100s digit
+
+    0s bin contains [ 2, 14, 35, 56, 65, 80 ]
+
+    1s bin contains [ 160 ]
+
+    8s bin contains [ 802 ]
+
+Which would be reassembled (in increasing order of the bin numbers) to produce
+
+    [ 2, 14, 35, 56, 65, 80, 160, 802 ]
+
+What is nice about this sort is that it doesn't require any comparisons between two numbers.  You only consider each number and what bin it goes into this time around.  In THAT respect, this is highly efficient because you don't have an exponential algorithm. 
+
+The assignment:
+
+    * Create a file called pa04.py
+    * Within this, create a method called radixSort() that takes aList as a parameter which can be assumed to be a list of non-negative integers only (like all of the lists we used in lab7).
+    * Constructs 11 queues (use the listQueue from earlier this semester).  These represent a main queue and 10 "bins" each of which stores one of the digits. 
+    * The algorithm determines the length of the largest number in the list
+    * The algorithm calculates how many powers of 10 are represented by this number (1s digit, 10s digit, 100s digit in my example is 3 powers of 10).  range(20000) would produce numbers 0-19999 which means I would need to consider 5 powers of 10 (1, 10, 100, 1000, 10000).
+    * Moves all the numbers from aList into the main queue
+    * For each power of 10 from 1 up to the largest power needed, it iteratively conducts a single stage.  During each stage the sort
+          o moves each number from the main queue (preserving order) into the appropriate bin/queue
+          o once the main queue is empty, refills the main queue by emptying the 10 individual queues, in order
+    * returns the finished, sorted list
+
+Hints/suggestions:
+
+    * max(aList) will return the maximum value in a list for you
+    * rather than maintain 10 separate queues for the digits you should figure out how to create a list/array where each element in the array is a queue.  Thus, to put a value into the "2s bin" you could just say  
+          o bins[2].enqueue(value)
+    * You will need to think carefully about how to take a number such as 12345 and extract a particular digit - say the 100s digit.  This can be done several different ways by taking advantage of integer division and the modulo operator
+
+Submitting your assignment
+
+To get full credit for this assignment you must:
+
+    * Produce pa04.py that contains the radixSort() described above.
+    * Upload your pa04.py by the deadline
+    * Submit paper printouts of this file by the deadline
+

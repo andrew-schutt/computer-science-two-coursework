@@ -1,0 +1,65 @@
+Data Structures
+
+PA 03
+Working with Queues
+
+Due by Friday, September 26th at the start of class
+
+The assignment
+
+This assignment asks you to write methods (in a file called pa03.py) that use a queue (I suggest you simply use my listQueue.py that I have been distributing) to solve two problems.
+
+ 
+
+Method A
+
+Write a method which solves the bored jailor problem as defined in session 10
+
+    * Write a method called jailor() that takes three parameters representing
+          o the number of cells in the cell block (20 in my example)
+          o the number of laps the jailor makes through the night (10 in my example)
+          o the "skip factor" - how many doors he counts before toggling that last door (7 in my example, meaning he skips 6 then toggles the 7th)
+    * Runs the desired length of time (based on the number of laps parameter) toggling doors as described.
+    * Uses a queue to manage the data (there are non-queue based solutions that work just fine)
+    * Prints out an "ordered" list of cells that are unlocked at the end of the night
+
+ 
+
+Implementation thoughts:
+
+The basic code that manages the circulation and the lock/unlock function are relatively tightly linked to the problem specification above.  However, you DO have one design option to think about - what goes on the queue.
+
+The "easiest" solution is to simply stick 20 True values on the queue to mimic the start of the night (all doors are locked) and then work through the queue switching True to False when you unlock the door and back again when it gets relocked later.  However, the downside of this solution is that it is harder to keep track of which door you are looking at.  If in the "middle of the jailors shift" I asked you to stop and tell me what door he was looking at (what door is on the front of the queue) you would have a hard time telling me IF you even can. 
+
+The alternative solution is to make a class called something like Cell or Door.  This class would know at least two things - whether or not it is locked (the True/False from the first solution) and which door it is in the cell block.  Thus, at ANY time you can look at the door at the front of the queue and determine it's position in the cell block. 
+
+I will not force you to handle one solution over the other.  I actually LIKE the second solution better but it is more complex to a certain degree.
+
+ 
+
+Method B
+
+An "Acrostic Poem" is a poem that is written on a theme.  It uses the letters in this theme to begin each line of the poem. 
+
+For example,
+
+        Shines brightly
+        Up in the sky
+        Nice and warm on my skin
+
+is a poem about the sun where we can see that the word Sun is spelled in the first letters of the three lines of the poem.
+
+Write a method called acrostic() that takes one string, assumed to be a text file, as a parameter.  The code should open this file, read it in, locate the first letter of the first line in the poem and put this letter in the queue.  It should continue with each additional line of the poem.  When the poem is done it should dequeue the letters on the queue and construct a string representing the "theme" of the poem.  This string should be returned.
+
+You may use sun.txt as a test of this method.  You may also use this poem written by Edgar Allen Poe.
+
+ 
+
+Submitting your assignment
+
+To get full credit for this assignment you must:
+
+    * Produce pa03.py that meets the requirements described above
+    * Upload your pa03.py by the deadline
+    * Submit paper printouts of this file by the deadline
+

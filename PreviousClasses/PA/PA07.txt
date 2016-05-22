@@ -1,0 +1,59 @@
+Data Structures
+
+PA 07
+Reading and Writing a graph from/to a file
+
+Due by Tuesday, December 2nd at the start of lab
+
+The introduction
+
+When I introduced graphs during session 32 we discussed the mathematical representation of a graph.  For example, the following mathematical representation:
+
+G=({1,2,3,4,5,6,7},{(1,2,2),(1,4,1),(2,4,3),(2,5,10),(3,1,4),(3,6,5),(4,3,2),(4,5,2),(4,6,8),(4,7,4),(5,7,6),(7,6,1)})
+
+is how we describe this graph
+
+In this assignment I want you to write a program to read a mathematical representation and produce a Graph() and take an existing Graph() and write out it's mathematical representation.
+
+The requirements
+
+    * In a file called pa07.py write a method called readGraphFromFile().  This method...
+          o Takes a single parameter - a string representing the name of an input file.  That file can be assumed to have one "line" of text which is a mathematical representation of a graph as described above.
+          o Parses that string into its vertices and edges.
+          o Constructs a new graph with the data extracted (using graph.py and vertex.py)
+          o Returns this graph
+          o You may use the following files to test this method:
+                + graph1.txt
+                + graph2.txt
+
+       
+    * In a file called pa07.py write a second method called writeFileFromGraph().  This method...
+          o Takes two parameters
+                + a previously constructed graph
+                + a string representing the name of an output file
+          o Creates a mathematical representation of the graph using the format described above
+          o Writes that representation to the provided output file
+
+        
+
+How I will test your code
+
+   1. I will use readGraphFromFile() to read in a graph from a file that I provide (it may or may not be one of the two listed above).
+   2. I will add additional verticies and/or edges to the graph that you return in step 1.
+   3. I will use writeFileFromGraph() using this modified graph from step 2.
+   4. I will use readGraphFromFile() to read in the output file you created in step 3.
+   5. I will test the graph returned by step 4 to see if it is the same graph I was working with at the end of step2
+
+If you fail step 5 you have largely failed this assignment.  You may have the two methods described in the requirements section but if you fail step 5 you don't actually have the two methods working properly.
+
+Submitting your assignment
+
+To get full credit for this assignment you must:
+
+    * Produce pa07.py as described above
+    * Upload a zip file named pa07.zip which contains
+          o pa07.py
+          o graph.py (should not have been modified by you)
+          o vertex.py (should not have been modified by you)
+    * Submit a paper printout of pa07.py
+
